@@ -11,11 +11,11 @@ def secure_linux_system():
     # Make backups
     os.system("sudo mkdir /dev/bkp")
     os.system("rocky")# change password when on diffrent box
-    os.system("sudo cp -r /var /dev/bkp")
-    os.system("sudo cp -r /etc /dev/bkp")
-    os.system("sudo cp -r /opt /dev/bkp")
-    os.system("sudo cp -r /home /dev/bkp")
-    os.system("sudo chattr +a /dev/bkp")
+    os.system("sudo cp -r /var /bin/bkp")
+    os.system("sudo cp -r /etc /bin/bkp")
+    os.system("sudo cp -r /opt /bin/bkp")
+    os.system("sudo cp -r /home /bin/bkp")
+    os.system("sudo chattr +a /bin/bkp")
 
     # Change Passwords
     os.system('sudo passwd rocky')
