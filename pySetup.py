@@ -10,17 +10,21 @@ def secure_linux_system():
 
     # Make backups
     os.system("sudo mkdir /dev/bkp")
-    os.system("rocky")# change password when on diffrent box
-    os.system("sudo cp -r /var /bin/bkp")
-    os.system("sudo cp -r /etc /bin/bkp")
-    os.system("sudo cp -r /opt /bin/bkp")
-    os.system("sudo cp -r /home /bin/bkp")
-    os.system("sudo chattr +a /bin/bkp")
+    os.system("sudo cp -r /var /dev/bkp")
+    os.system("sudo cp -r /etc /dev/bkp")
+    os.system("sudo cp -r /opt /dev/bkp")
+    os.system("sudo cp -r /home /dev/bkp")
+    os.system("sudo chattr +a /dev/bkp")
 
     # Change Passwords
     os.system('sudo passwd rocky')
-    os.system('Rocky')
-    os.system('Rocky')
+
+
+    # update services / install services
+    os.system('sudo yum install tshark')
+    os.system('sudo yum install nano')
+    os.system('sudo yum install nmap')
+    os.system('sudo -y upgrade')
 
     # Configure the firewall
     os.system('sudo dnf install ufw -y')
@@ -32,6 +36,12 @@ def secure_linux_system():
 
     # Disable root login
     # os.system('sudo passwd -l root')
+
+    # remove password for user (keypair)
+          # -> run this id .ssh is not already on server <- os.system('mkdir ~/.ssh && chmod 700 ~/.shh')
+    # os.system('ssh-keygen -b 4096')
+    # os.system('ssh-copy-id iNSERT_USERNAME@INSERT-IP')
+
 
     '''
     # Set up SSH key authentication
@@ -60,3 +70,78 @@ def secure_linux_system():
 secure_linux_system()
 
 print("The Linux system has been secured.")
+
+
+
+'''
+            --CHANGE DEFAULT PASSWORDS--
+sudo passwd {username}: Change user's password
+
+                   --SSH COMMANDS--
+nano /etc/ssh/sshd_config: Opens the sshd configuration file
+    -Set Pubkey Authentication to no
+    -Add line: AllowUsers hkeating plinktern
+    -Restart ssh service with: sudo systemctl restart sshd
+
+            --KILL MALICIOUS PROCESSES--
+sudo ps aux: Display running processes
+sudo kill {process_number}: Kills the process with a given process_number
+sudo pkill {process_name}: Kills all processes containing process_name
+
+           --REMOVE UNUSED USER ACCOUNTS--
+cat /etc/passwd: Shows all user accounts
+sudo userdel {username}: Removes the user account called username
+    -Can only be removed after all user processes have been killed
+
+            --CLOSE UNUSED OPEN PORTS--
+sudo ss -tulnp | grep LISTEN: Shows all open TCP/UDP and listening ports
+sudo systemctl stop {name_of_service}: Closes the port running a service called name_of_service
+sudo systemctl disable {name_of_service}: Disables this port on any system reboot
+
+                --FIREWALL COMMANDS--
+sudo ufw deny from {IP_address}: Denies all traffic from IP_address
+     -Use cat /var/log/auth.log | grep sshd
+     -Checks for sshd connections to server
+sudo ufw deny from {IP_address} to ssh: Denies all ssh connections from IP_address
+sudo ufw allow {service}: Allows a certain service (ssh, http)
+sudo ufw delete {#}: Deletes the ufw rule located at #
+sudo ufw insert {#} {rule}: Inserts the ufw rule at # position
+
+                --MYSQL COMMANDS--
+sudo mysql -uroot -p: Log in to mySQL
+\s: Check status of server
+     -Look for SSL (enabled/disabled)
+sudo nano /etc/mysql/my.cnf: View SQL configuration file
+     -Add the following lines at the end:
+     -[mysqld]
+     -bind-address = 0.0.0.0
+     -require_secure_transport = ON
+sudo service mysql restart: Restart the mySQL service to update config
+
+            --OTHER HELPFUL COMMANDS--
+hostname -i: Displays your IP address
+man {command}: Displays the manual for command 
+service --status-all | grep '\[ + \]': shows all currently runing services
+chattr +a /path/to/folder : makes a folder immutable
+chattr +i /path/to/file : makes a file immutable 
+
+
+'''
+
+
+
+"""
+How to secure SSH on linux
+
+Access ssh config:
+    sudo nano /etc/ssh/sshd_config
+
+Things to change:
+   
+change - #AddressFamily (to) AddressFamily inet (this changes to ipv4)(remove # to change)
+change - #PermitRootLogin (to) PermitRootLogin no (remove # to change)
+notes:
+    
+after this will need to put -p after the ssh to specify port-
+
+"""
