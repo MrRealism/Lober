@@ -9,11 +9,10 @@ def secure_linux_system():
     #os.system('sudo dpkg-reconfigure --priority=low unattended-upgrades')
 
     # Some basic commands
-    os.system("passwd -l root")
-    os.system("echo "PermitRootLogin no" >> /etc/ssh/sshd_config")
-    os.system("echo "Protocol 2" >> /etc/ssh/sshd_config")
-    os.system("echo "AllowUsers Realism ubuntu" >> /etc/ssh/sshd_confi")
-    # os.system("")
+    os.system('passwd -l root')
+    os.system('echo "PermitRootLogin no" >> /etc/ssh/sshd_config')
+    os.system('echo "Protocol 2" >> /etc/ssh/sshd_config')
+    os.system('echo "AllowUsers Realism ubuntu" >> /etc/ssh/sshd_config')
 
     # Configure the firewall
     os.system('sudo dnf install ufw -y')
@@ -49,7 +48,7 @@ def secure_linux_system():
     os.system('sudo yum install nano -y')
     os.system('sudo yum install nmap -y')
     os.system('sudo yum install curl -y')
-    os.system('sudo yum update -y')
+    os.system('sudo -y upgrade')
 
     
 
