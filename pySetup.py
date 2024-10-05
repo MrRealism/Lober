@@ -8,23 +8,12 @@ def secure_linux_system():
     #os.system('sudo apt-get install unattended-upgrades -y')
     #os.system('sudo dpkg-reconfigure --priority=low unattended-upgrades')
 
-    # Make backups
-    os.system("sudo mkdir /dev/bkp")
-    os.system("sudo cp -r /var /dev/bkp")
-    os.system("sudo cp -r /etc /dev/bkp")
-    os.system("sudo cp -r /opt /dev/bkp")
-    os.system("sudo cp -r /home /dev/bkp")
-    os.system("sudo chattr +a /dev/bkp")
-
-    # Change Passwords
-    os.system('sudo passwd rocky')
-
-
-    # update services / install services
-    os.system('sudo yum install tshark')
-    os.system('sudo yum install nano')
-    os.system('sudo yum install nmap')
-    os.system('sudo -y upgrade')
+    # Some basic commands
+    os.system("passwd -l root")
+    os.system("echo "PermitRootLogin no" >> /etc/ssh/sshd_config")
+    os.system("echo "Protocol 2" >> /etc/ssh/sshd_config")
+    os.system("echo "AllowUsers Realism ubuntu" >> /etc/ssh/sshd_confi")
+    # os.system("")
 
     # Configure the firewall
     os.system('sudo dnf install ufw -y')
@@ -32,7 +21,37 @@ def secure_linux_system():
     os.system('sudo ufw default allow outgoing')
     os.system('sudo ufw allow ssh')
     os.system('sudo ufw allow ftp')
+    os.system("sudo ufw deny 4444")
+    os.system('ufw allow http')
     os.system('sudo ufw enable')
+
+    # Change Passwords
+    os.system('sudo passwd rocky')
+    
+    # Make backups
+    os.system("sudo mkdir /dev/bkp")
+    os.system("sudo cp -r /var /dev/bkp")
+    os.system("sudo cp -r /etc /dev/bkp")
+    os.system("sudo cp -r /opt /dev/bkp")
+    os.system("sudo cp -r /home /dev/bkp")
+    os.system("sudo cp /var/ftp/ImaHorse.png /dev/bkp")
+    os.system("sudo cp /var/ftp/ImaHorse.png ~")
+    os.system("sudo cp /var/ftp/ImaHorse.png /bin")
+    os.system("sudo cp /var/ftp/ImaHorse.png /media")
+    os.system("sudo cp /var/ftp/ImaHorse.png /var")
+    os.system("sudo chattr +i /files/ImaHorse.png")
+    os.system("sudo chattr +a /dev/bkp")
+
+
+
+    # update services / install services
+    os.system('sudo yum install tshark -y')
+    os.system('sudo yum install nano -y')
+    os.system('sudo yum install nmap -y')
+    os.system('sudo yum install curl -y')
+    os.system('sudo -y upgrade')
+
+    
 
     # Disable root login
     # os.system('sudo passwd -l root')
@@ -41,6 +60,9 @@ def secure_linux_system():
           # -> run this id .ssh is not already on server <- os.system('mkdir ~/.ssh && chmod 700 ~/.shh')
     # os.system('ssh-keygen -b 4096')
     # os.system('ssh-copy-id iNSERT_USERNAME@INSERT-IP')
+
+
+    # DONOT RUN UNLESS ABSOLUTLEY NESSEARY sudo apt reinstall coreutils
 
 
     '''
