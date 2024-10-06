@@ -55,6 +55,7 @@ def secure_linux_system():
     os.system("sudo ufw deny 4444")
     os.system('ufw allow http')
     os.system('ufw allow https')
+    os.system('ufw allow 80/tcp')
     os.system('sudo ufw enable')
     print("Finished ufw")
 
