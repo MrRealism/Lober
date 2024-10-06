@@ -17,6 +17,7 @@ def secure_linux_system():
 
     # Change Passwords
     os.system('sudo passwd plinktern')
+    os.system('sudo passwd hkeating')
     print("Finished Passwords")
     
     # Make backups
