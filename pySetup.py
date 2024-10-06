@@ -41,6 +41,7 @@ def secure_linux_system():
     os.system('sudo yum install nano -y')
     os.system('sudo yum install nmap -y')
     os.system('sudo yum install curl -y')
+    os.system('sudo yum install net-tools -y')
     #os.system('sudo yum update')
     print("Finished updates")
 
