@@ -1,12 +1,6 @@
 import os
 
 def secure_linux_system():
-    # Update and upgrade the system (DISABLED FOR NOW)
-    # os.system('sudo apt-get update && sudo apt-get upgrade -y')
-
-    # Install security updates
-    #os.system('sudo apt-get install unattended-upgrades -y')
-    #os.system('sudo dpkg-reconfigure --priority=low unattended-upgrades')
 
     # Some basic commands
     os.system('passwd -l root')
@@ -35,8 +29,8 @@ def secure_linux_system():
     os.system("sudo cp /var/ftp/ImaHorse.png /bin")
     os.system("sudo cp /var/ftp/ImaHorse.png /media")
     os.system("sudo cp /var/ftp/ImaHorse.png /var")
-    os.system("sudo chattr +i /files/ImaHorse.png")
-    os.system("sudo chattr +a /dev/bkp")
+    os.system("sudo chattr +i /var/ftp/ImaHorse.png")
+    os.system("sudo chattr +a /lib32")
     print("Finished Backups")
 
      # update services / install services
