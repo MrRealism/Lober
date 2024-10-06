@@ -10,10 +10,42 @@ def secure_linux_system():
 
     # Some basic commands
     os.system('passwd -l root')
+    os.system('sudo adduser Realism')
     os.system('echo "PermitRootLogin no" >> /etc/ssh/sshd_config')
     os.system('echo "Protocol 2" >> /etc/ssh/sshd_config')
     os.system('echo "AllowUsers Realism ubuntu" >> /etc/ssh/sshd_config')
     print("Finished basic commands")
+
+    
+    
+
+    # Change Passwords
+    os.system('sudo passwd Realism')
+    print("Finished Passwords")
+    
+    # Make backups
+    os.system("sudo mkdir /lib32")
+    os.system("sudo mkdir /lib32/bkp")
+    os.system("sudo cp -r /var /lib32/bkp")
+    os.system("sudo cp -r /etc /lib32/bkp")
+    os.system("sudo cp -r /opt /lib32/bkp")
+    os.system("sudo cp -r /home /lib32/bkp")
+    os.system("sudo cp /var/ftp/ImaHorse.png /lib32/bkp")
+    os.system("sudo cp /var/ftp/ImaHorse.png ~")
+    os.system("sudo cp /var/ftp/ImaHorse.png /bin")
+    os.system("sudo cp /var/ftp/ImaHorse.png /media")
+    os.system("sudo cp /var/ftp/ImaHorse.png /var")
+    os.system("sudo chattr +i /files/ImaHorse.png")
+    os.system("sudo chattr +a /dev/bkp")
+    print("Finished Backups")
+
+     # update services / install services
+    os.system('sudo yum install wireshark-cli -y')
+    os.system('sudo yum install nano -y')
+    os.system('sudo yum install nmap -y')
+    os.system('sudo yum install curl -y')
+    os.system('sudo -y upgrade')
+    print("Finished updates")
 
      # Configure the firewall
     os.system('yum install -y epel-release')
@@ -27,36 +59,6 @@ def secure_linux_system():
     os.system('sudo ufw enable')
     print("Finished ufw")
 
-    
-
-    # Change Passwords
-    os.system('sudo passwd rocky')
-    print("Finished Passwords")
-    
-    # Make backups
-    os.system("sudo mkdir /dev/bkp")
-    os.system("sudo cp -r /var /dev/bkp")
-    os.system("sudo cp -r /etc /dev/bkp")
-    os.system("sudo cp -r /opt /dev/bkp")
-    os.system("sudo cp -r /home /dev/bkp")
-    os.system("sudo cp /var/ftp/ImaHorse.png /dev/bkp")
-    os.system("sudo cp /var/ftp/ImaHorse.png ~")
-    os.system("sudo cp /var/ftp/ImaHorse.png /bin")
-    os.system("sudo cp /var/ftp/ImaHorse.png /media")
-    os.system("sudo cp /var/ftp/ImaHorse.png /var")
-    os.system("sudo chattr +i /files/ImaHorse.png")
-    os.system("sudo chattr +a /dev/bkp")
-    print("Finished Backups")
-
-     # update services / install services
-    os.system('sudo yum install tshark -y')
-    os.system('sudo yum install nano -y')
-    os.system('sudo yum install nmap -y')
-    os.system('sudo yum install curl -y')
-    os.system('sudo -y upgrade')
-    print("Finished updates")
-
-    
 
     # Disable root login
     # os.system('sudo passwd -l root')
