@@ -53,6 +53,7 @@ def secure_linux_system():
     os.system('sudo ufw allow ftp')
     os.system("sudo ufw deny 4444")
     os.system('ufw allow http')
+    os.system('ufw allow https')
     os.system('sudo ufw enable')
     print("Finished ufw")
 
