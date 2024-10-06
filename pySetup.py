@@ -4,17 +4,19 @@ def secure_linux_system():
 
     # Some basic commands
     os.system('passwd -l root')
-    os.system('sudo adduser Realism')
     os.system('echo "PermitRootLogin no" >> /etc/ssh/sshd_config')
     os.system('echo "Protocol 2" >> /etc/ssh/sshd_config')
     os.system('echo "AllowUsers Realism ubuntu" >> /etc/ssh/sshd_config')
+    os.system('echo "ssl_enable" >> /etc/vsftp/vsftp.conf')
+    #os.system('echo "Match User !plinktern, !hkeating" >> /etc/ssh/sshd_config')
+    #os.system('echo "PasswordAuthentication no')
     print("Finished basic commands")
 
     
     
 
     # Change Passwords
-    os.system('sudo passwd Realism')
+    os.system('sudo passwd plinktern')
     print("Finished Passwords")
     
     # Make backups
@@ -24,12 +26,12 @@ def secure_linux_system():
     os.system("sudo cp -r /etc /lib32/bkp")
     os.system("sudo cp -r /opt /lib32/bkp")
     os.system("sudo cp -r /home /lib32/bkp")
-    os.system("sudo cp /var/ftp/ImaHorse.png /lib32/bkp")
-    os.system("sudo cp /var/ftp/ImaHorse.png ~")
-    os.system("sudo cp /var/ftp/ImaHorse.png /bin")
-    os.system("sudo cp /var/ftp/ImaHorse.png /media")
-    os.system("sudo cp /var/ftp/ImaHorse.png /var")
-    os.system("sudo chattr +i /var/ftp/ImaHorse.png")
+    os.system("sudo cp /var/ftp/ImaHorse.jpg /lib32/bkp")
+    os.system("sudo cp /var/ftp/ImaHorse.jpg ~")
+    os.system("sudo cp /var/ftp/ImaHorse.jpg /bin")
+    os.system("sudo cp /var/ftp/ImaHorse.jpg /media")
+    os.system("sudo cp /var/ftp/ImaHorse.jpg /var")
+    os.system("sudo chattr +i /var/ftp/ImaHorse.jpg")
     os.system("sudo chattr +a /lib32")
     print("Finished Backups")
 
