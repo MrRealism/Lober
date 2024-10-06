@@ -13,8 +13,10 @@ def secure_linux_system():
     os.system('echo "PermitRootLogin no" >> /etc/ssh/sshd_config')
     os.system('echo "Protocol 2" >> /etc/ssh/sshd_config')
     os.system('echo "AllowUsers Realism ubuntu" >> /etc/ssh/sshd_config')
+    print("Finished basic commands")
 
-    # Configure the firewall
+     # Configure the firewall
+    os.system('yum install -y epel-release')
     os.system('sudo dnf install ufw -y')
     os.system('sudo ufw default deny incoming')
     os.system('sudo ufw default allow outgoing')
@@ -23,9 +25,13 @@ def secure_linux_system():
     os.system("sudo ufw deny 4444")
     os.system('ufw allow http')
     os.system('sudo ufw enable')
+    print("Finished ufw")
+
+    
 
     # Change Passwords
     os.system('sudo passwd rocky')
+    print("Finished Passwords")
     
     # Make backups
     os.system("sudo mkdir /dev/bkp")
@@ -40,15 +46,15 @@ def secure_linux_system():
     os.system("sudo cp /var/ftp/ImaHorse.png /var")
     os.system("sudo chattr +i /files/ImaHorse.png")
     os.system("sudo chattr +a /dev/bkp")
+    print("Finished Backups")
 
-
-
-    # update services / install services
+     # update services / install services
     os.system('sudo yum install tshark -y')
     os.system('sudo yum install nano -y')
     os.system('sudo yum install nmap -y')
     os.system('sudo yum install curl -y')
     os.system('sudo -y upgrade')
+    print("Finished updates")
 
     
 
